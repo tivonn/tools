@@ -2,7 +2,7 @@
 
 ## 项目介绍
 
-tools for JavaScript
+JavaScript工具库 / tools for JavaScript
 
 ## 技术栈
 
