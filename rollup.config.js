@@ -1,8 +1,9 @@
 import { babel } from '@rollup/plugin-babel'
+import typescript from 'rollup-plugin-typescript'
 
 export default {
-  input: 'src/main.js',
-  output:[
+  input: 'src/main.ts',
+  output: [
     {
       file: 'dist/index.es.js',
       format: 'es'
@@ -16,6 +17,7 @@ export default {
   plugins: [
     babel({
       presets: ['@babel/preset-env']
-    })
+    }),
+    typescript()
   ]
 }

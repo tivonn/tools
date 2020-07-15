@@ -1,40 +1,60 @@
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
 /**
  * 防抖
- * @param {number} n
- * @return {string}
  */
-var debounce = function debounce(fn) {
-  var minDelay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
-  var scope = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var timeout;
-  return function () {
-    timeout && clearTimeout(timeout);
-    timeout = setTimeout(fn.bind.apply(fn, [scope || this].concat(Array.prototype.slice.call(arguments))), minDelay);
-  };
+var debounce = function (fn, minDelay, scope) {
+    if (minDelay === void 0) { minDelay = 300; }
+    if (scope === void 0) { scope = null; }
+    var timeout;
+    return function () {
+        timeout && clearTimeout(timeout);
+        timeout = setTimeout(fn.bind.apply(fn, __spreadArrays([scope || this], arguments)), minDelay);
+    };
 };
-
-var throttle = function throttle(fn) {
-  var minDelay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
-  var scope = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var lastCall = 0;
-  var timeout;
-  return function () {
-    var now = Date.now();
-
-    if (now - lastCall < minDelay) {
-      timeout && clearTimeout(timeout);
-      return timeout = setTimeout(fn.bind.apply(fn, [scope || this].concat(Array.prototype.slice.call(arguments))), minDelay);
-    }
-
-    lastCall = now;
-    timeout && clearTimeout(timeout);
-    fn.apply(scope || this, arguments);
-  };
+/**
+ * 节流
+ */
+var throttle = function (fn, minDelay, scope) {
+    if (minDelay === void 0) { minDelay = 300; }
+    if (scope === void 0) { scope = null; }
+    var lastCall = 0;
+    var timeout;
+    return function () {
+        var now = Date.now();
+        if (now - lastCall < minDelay) {
+            timeout && clearTimeout(timeout);
+            return timeout = setTimeout(fn.bind.apply(fn, __spreadArrays([scope || this], arguments)), minDelay);
+        }
+        lastCall = now;
+        timeout && clearTimeout(timeout);
+        fn.apply(scope || this, arguments);
+    };
 };
-
 var main = {
-  debounce: debounce,
-  throttle: throttle
+    debounce: debounce,
+    throttle: throttle
 };
 
 export default main;

@@ -1,11 +1,7 @@
 /**
  * 防抖
- * @param {function} fn
- * @param {number} minDelay
- * @param {object} scope
- * @return {function}
  */
-const debounce = (fn, minDelay = 300, scope = null) => {
+const debounce = (fn: any, minDelay: number = 300, scope: object = null): any => {
   let timeout
   return function () {
     timeout && clearTimeout(timeout)
@@ -15,12 +11,8 @@ const debounce = (fn, minDelay = 300, scope = null) => {
 
 /**
  * 节流
- * @param {function} fn
- * @param {number} minDelay
- * @param {object} scope
- * @return {function}
  */
-const throttle = (fn, minDelay = 300, scope = null) => {
+const throttle = (fn: any, minDelay: number = 300, scope: object = null): any => {
   let lastCall = 0
   let timeout
   return function () {

@@ -6,7 +6,7 @@ tools for JavaScript
 
 ## 技术栈
 
-Rollup
+Rollup、TypeScript
 
 ## 启动项目
 
